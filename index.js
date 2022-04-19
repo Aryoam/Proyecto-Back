@@ -10,7 +10,7 @@ dotenv.config();
 
 conectarDB(); // llamo a la funcion para conectar la base de datos
 
-const whiteList = ["http://localhost:3000"];
+const whiteList = ["http://localhost:3000", undefined];
 
 const opcionesCors = {
   origin: function (origin, callback) {
@@ -19,6 +19,7 @@ const opcionesCors = {
     } else {
       callback(new Error("Bloqueado por Cors"));
     }
+    console.log(origin);
   },
 };
 
