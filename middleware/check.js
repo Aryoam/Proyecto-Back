@@ -10,7 +10,7 @@ const check = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(" ")[1];
 
-      const decoded = jwt.verify(token, "passwordddd");
+      const decoded = jwt.verify(token, process.env.KEY_JWT);
 
       console.log(decoded);
 
