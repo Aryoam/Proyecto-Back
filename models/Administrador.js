@@ -19,6 +19,16 @@ const schemaAdministrador = mongoose.Schema(
       trim: true,
       unique: true,
     },
+    telefono: {
+      type: Number,
+      required: true,
+      trim: true,
+      unique: true,
+    },
+    foto: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

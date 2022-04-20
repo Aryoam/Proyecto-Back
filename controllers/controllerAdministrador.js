@@ -29,6 +29,9 @@ const autenticacion = async (req, res) => {
       _id: enfermero._id,
       nombre: enfermero.nombre,
       token: jwtNuevo(enfermero._id),
+      foto: enfermero.foto,
+      telefono: enfermero.telefono,
+      email: enfermero.email,
     });
   } else {
     return res.status(404).json({ msg: "La contraseña es incorrecta" });
