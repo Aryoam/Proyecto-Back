@@ -12,8 +12,6 @@ const check = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.KEY_JWT);
 
-      console.log(decoded);
-
       req.enfermero = await Administrador.findById(decoded.id).select(
         "-password -createdAt -updateAt"
       );

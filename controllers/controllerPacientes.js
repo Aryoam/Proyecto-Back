@@ -1,7 +1,6 @@
 import Pacientes from "../models/Pacientes.js";
 
 const registrarPaciente = async (req, res) => {
-  console.log("kjfnjk");
   const pacienteDuplicado = await Pacientes.findOne({
     telefono: req.body.telefono,
   });
