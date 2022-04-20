@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import conectarDB from "./config/dataBase.js";
 import routesAdministrador from "./routes/routesAdministrador.js";
+import routesPacientes from "./routes/routesPacientes.js";
 import dotenv from "dotenv";
 
 const app = express();
@@ -19,13 +20,13 @@ const opcionesCors = {
     } else {
       callback(new Error("Bloqueado por Cors"));
     }
-    console.log(origin);
   },
 };
 
 app.use(cors(opcionesCors));
 
 app.use("/api/administradores", routesAdministrador);
+app.use("/api/pacientes", routesPacientes);
 
 app.listen(4000, () => {
   console.log("Servidor correcto");
