@@ -1,47 +1,59 @@
 import Administrador from "../models/Administrador.js";
 import jwtNuevo from "../helpers/jwtNuevo.js";
+import Paciente from "../models/Paciente.js";
 
-const registrarEnfermero = async (req, res) => {
+const perfil = async (req, res) => {
+  const { administrador } = req;
+
+  res.json(administrador);
+  console.log("frknj");
+};
+
+const home = async () => {
+  console.log("jdnfkjnfjr");
+};
+
+const registrarAdministrador = async (req, res) => {
   const duplicado = await Administrador.findOne({ email: req.body.email });
 
   if (duplicado) {
-    return res.status(404).json({ msg: "Ya existe este enfermero" });
+    return res.status(404).json({ msg: "Ya existe este administrador" });
   }
   try {
-    const enfermero = new Administrador(req.body);
-    const nuevoEnfermero = await enfermero.save();
+    const administrador = new Administrador(req.body);
+    const nuevoAdministrador = await administrador.save();
     res.json({ msg: "Registro correcto" });
   } catch (error) {
     res.json({ msg: error });
   }
 };
 
-const autenticacion = async (req, res) => {
-  const enfermero = await Administrador.findOne({ email: req.body.email });
+const obtenerPaciente = async (req, res) => {
+  const enfermeros = await Administrador.find();
 
-  if (!enfermero) {
+  res.json(enfermeros);
+};
+
+const autenticacion = async (req, res) => {
+  const administrador = await Administrador.findOne({ email: req.body.email });
+
+  if (!administrador) {
     return res.status(404).json({ msg: "El usuario no existe" });
   }
 
   //comprobar contraseña
-  if (await enfermero.checkPassword(req.body.password)) {
+  if (await administrador.checkPassword(req.body.password)) {
     res.json({
-      _id: enfermero._id,
-      nombre: enfermero.nombre,
-      token: jwtNuevo(enfermero._id),
-      foto: enfermero.foto,
-      telefono: enfermero.telefono,
-      email: enfermero.email,
+      _id: administrador._id,
+      nombre: administrador.nombre,
+      token: jwtNuevo(administrador._id),
+      foto: administrador.foto,
+      telefono: administrador.telefono,
+      email: administrador.email,
     });
   } else {
     return res.status(404).json({ msg: "La contraseña es incorrecta" });
   }
 };
 
-const home = async (req, res) => {
-  const { enfermero } = req;
-
-  res.json(enfermero);
-};
-
-export { registrarEnfermero, autenticacion, home };
+export { registrarAdministrador, autenticacion, perfil, obtenerPaciente, home };

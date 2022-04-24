@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const schemaPacientes = mongoose.Schema(
+const schemaPaciente = mongoose.Schema(
   {
     nombre: {
       type: String,
@@ -10,6 +10,7 @@ const schemaPacientes = mongoose.Schema(
     edad: {
       type: Number,
       required: true,
+      trim: true,
     },
     telefono: {
       type: Number,
@@ -20,12 +21,23 @@ const schemaPacientes = mongoose.Schema(
       type: String,
       required: true,
     },
+    fechaEntrada: {
+      type: Date,
+      default: Date.now(),
+    },
     foto: {
-      required: true,
       type: String,
     },
     patologia: {
       type: String,
+    },
+    enfermero: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Enfermero",
+    },
+    pendiente: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Pendiente",
     },
   },
   {
@@ -33,6 +45,6 @@ const schemaPacientes = mongoose.Schema(
   }
 );
 
-const Pacientes = mongoose.model("Pacientes", schemaPacientes);
+const Paciente = mongoose.model("Paciente", schemaPaciente);
 
-export default Pacientes;
+export default Paciente;

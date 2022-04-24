@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import Pacientes from "../models/Pacientes.js";
+import Paciente from "../models/Paciente.js";
 
 const checkPaciente = async (req, res, next) => {
   let token;
@@ -11,8 +11,6 @@ const checkPaciente = async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
 
       const decoded = jwt.verify(token, process.env.KEY_JWT);
-
-      console.log(decoded);
 
       return next();
     } catch (error) {
