@@ -6,7 +6,6 @@ const perfil = async (req, res) => {
   const { administrador } = req;
 
   res.json(administrador);
-  console.log("frknj");
 };
 
 const home = async () => {
