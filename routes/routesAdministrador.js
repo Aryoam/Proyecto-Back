@@ -1,16 +1,20 @@
 import express from "express";
 import {
-  registrarEnfermero,
+  registrarAdministrador,
   autenticacion,
+  perfil,
+  obtenerPaciente,
   home,
 } from "../controllers/controllerAdministrador.js";
 import check from "../middleware/check.js";
 
 const router = express.Router();
 
-router.post("/registro", registrarEnfermero);
+router.post("/registro", registrarAdministrador);
 router.post("/login", autenticacion);
 
-router.get("/home", check, home);
+router.route("/").get(check, obtenerPaciente);
+
+router.get("/perfil", check, perfil);
 
 export default router;

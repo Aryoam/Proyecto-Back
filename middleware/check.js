@@ -12,19 +12,20 @@ const check = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.KEY_JWT);
 
-      req.enfermero = await Administrador.findById(decoded.id).select(
-        "-password -createdAt -updateAt"
+      req.administrador = await Administrador.findById(decoded.id).select(
+        "-password -createdAt -updatedAt -__v"
       );
-
-      return next();
+      next();
     } catch (error) {
-      return res.status(404).json({ msg: "error" });
+      return res.status(404).json({ msg: error });
     }
   }
 
   if (!token) {
-    res.status(404).json({ msg: "No hay token" });
+    return res.status(404).json({ msg: "No hay token" });
   }
+
+  next();
 };
 
 export default check;

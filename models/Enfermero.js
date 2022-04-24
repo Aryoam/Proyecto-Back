@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-const schemaAdministrador = mongoose.Schema(
+const schemaEnfermero = mongoose.Schema(
   {
     nombre: {
       type: String,
@@ -12,10 +12,6 @@ const schemaAdministrador = mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-    },
-    admin: {
-      type: Boolean,
-      default: true,
     },
     email: {
       type: String,
@@ -30,13 +26,20 @@ const schemaAdministrador = mongoose.Schema(
     foto: {
       type: String,
     },
+    pacientes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Paciente",
+        default: null,
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-schemaAdministrador.pre("save", async function (next) {
+schemaEnfermero.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
@@ -44,9 +47,9 @@ schemaAdministrador.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, hash);
 });
 
-schemaAdministrador.methods.checkPassword = async function (passwordIngresado) {
-  return await bcrypt.compare(passwordIngresado, this.password);
-};
+// schemaEnfermero.methods.checkPassword = async function (passwordIngresado) {
+//   return await bcrypt.compare(passwordIngresado, this.password);
+// };
+const Enfermero = mongoose.model("Enfermero", schemaEnfermero);
 
-const Administrador = mongoose.model("Administrador", schemaAdministrador);
-export default Administrador;
+export default Enfermero;
