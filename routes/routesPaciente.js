@@ -10,7 +10,7 @@ import check from "../middleware/check.js";
 const router = express.Router();
 
 router.post("/registro", registrarPaciente);
-router.post("/editar/:id", editarPaciente);
+router.put("/editar/:id", editarPaciente);
 router.get("/", listaPacientes);
 router.get("/pendientes/:id", listaPendientes);
 

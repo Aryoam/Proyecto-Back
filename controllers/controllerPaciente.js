@@ -1,5 +1,6 @@
 import Paciente from "../models/Paciente.js";
 import Administrador from "../models/Administrador.js";
+import Enfermero from "../models/Enfermero.js";
 
 const registrarPaciente = async (req, res) => {
   const pacienteDuplicado = await Paciente.findOne({
@@ -27,14 +28,25 @@ const listaPacientes = async (req, res) => {
 const editarPaciente = async (req, res) => {
   const { id } = req.params;
 
-  const paciente = await Paciente.findById(id);
+  const paciente = await Paciente.findById(id).populate("enfermero");
+  console.log(paciente);
 
   if (!paciente) {
     const error = new Error("El paciente no existe");
     return res.status(404).json({ msg: error });
   }
+  paciente.nombre = req.body.nombre || paciente.nombre;
+  paciente.email = req.body.email || paciente.email;
+  paciente.telefono = req.body.telefono || paciente.telefono;
+  paciente.foto = req.body.foto || paciente.foto;
+  paciente.enfermero = req.body.enfermero || paciente.enfermero;
 
-  res.json(paciente);
+  try {
+    const pacienteActualizado = await paciente.save();
+    res.json(pacienteActualizado);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const listaPendientes = async (req, res) => {
