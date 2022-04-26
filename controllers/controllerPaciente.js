@@ -25,6 +25,18 @@ const listaPacientes = async (req, res) => {
   res.json(pacientes);
 };
 
+const buscaPaciente = async (req, res) => {
+  const { id } = req.params;
+
+  const paciente = await Paciente.findById(id).populate("enfermero");
+  res.json(paciente);
+
+  if (!paciente) {
+    const error = new Error("El paciente no existe");
+    return res.status(404).json({ msg: error });
+  }
+};
+
 const editarPaciente = async (req, res) => {
   const { id } = req.params;
 
@@ -40,6 +52,9 @@ const editarPaciente = async (req, res) => {
   paciente.telefono = req.body.telefono || paciente.telefono;
   paciente.foto = req.body.foto || paciente.foto;
   paciente.enfermero = req.body.enfermero || paciente.enfermero;
+  paciente.sexo = req.body.sexo || paciente.sexo;
+  paciente.peso = req.body.peso || paciente.peso;
+  paciente.patologia = req.body.patologia || paciente.patologia;
 
   try {
     const pacienteActualizado = await paciente.save();
@@ -57,4 +72,10 @@ const listaPendientes = async (req, res) => {
   res.json(pendiente);
 };
 
-export { registrarPaciente, editarPaciente, listaPendientes, listaPacientes };
+export {
+  registrarPaciente,
+  editarPaciente,
+  listaPendientes,
+  listaPacientes,
+  buscaPaciente,
+};

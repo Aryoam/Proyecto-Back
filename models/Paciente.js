@@ -12,6 +12,14 @@ const schemaPaciente = mongoose.Schema(
       required: true,
       trim: true,
     },
+    sexo: {
+      type: String,
+      trim: true,
+    },
+    peso: {
+      type: String,
+      trim: true,
+    },
     telefono: {
       type: Number,
       required: true,
