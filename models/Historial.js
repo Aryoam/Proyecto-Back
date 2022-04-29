@@ -7,7 +7,7 @@ const schemaHistorial = mongoose.Schema(
       trim: true,
     },
     temperatura: {
-      type: String,
+      type: Number,
       trim: true,
     },
     comida: {
@@ -22,19 +22,19 @@ const schemaHistorial = mongoose.Schema(
       trim: true,
     },
     cardiaca: {
-      type: String,
+      type: Number,
       trim: true,
     },
     respiratoria: {
-      type: String,
+      type: Number,
       trim: true,
     },
     oxigeno: {
-      type: String,
+      type: Number,
       trim: true,
     },
     arterial: {
-      type: String,
+      type: Number,
       trim: true,
     },
     medicacion: {
