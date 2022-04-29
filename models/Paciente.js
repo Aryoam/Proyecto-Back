@@ -30,8 +30,8 @@ const schemaPaciente = mongoose.Schema(
       required: true,
     },
     fechaEntrada: {
-      type: Date,
-      default: Date.now(),
+      type: String,
+      default: new Date().toISOString().split("T")[0],
     },
     foto: {
       type: String,
@@ -43,10 +43,12 @@ const schemaPaciente = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Enfermero",
     },
-    pendiente: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Pendiente",
-    },
+    historial: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Historial",
+      },
+    ],
   },
   {
     timestamps: true,
