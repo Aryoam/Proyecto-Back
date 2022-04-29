@@ -74,9 +74,15 @@ const listaPendientes = async (req, res) => {
 };
 
 const agregarHistorial = async (req, res) => {
+  const { paciente } = req.body;
+
+  const pacienteSeleccionado = await Paciente.findById(paciente);
+
   try {
     const historial = new Historial(req.body);
     const historialPaciente = await historial.save();
+    pacienteSeleccionado.historial.push(historialPaciente._id);
+    await pacienteSeleccionado.save();
     res.json({ msg: historialPaciente });
   } catch (error) {
     res.status(404).json({ msg: error });
