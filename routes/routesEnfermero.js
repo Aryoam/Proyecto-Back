@@ -6,6 +6,7 @@ import {
   agregarPaciente,
   eliminarPaciente,
   editarEnfermero,
+  aizon,
 } from "../controllers/controllerEnfermero.js";
 import check from "../middleware/check.js";
 
@@ -15,6 +16,7 @@ router.post("/registro", registrarEnfermero);
 router.post("/login", loginEnfermero);
 
 router.get("/lista", listaEnfermeros);
+router.get("/", aizon);
 router.put("/editar/:id", editarEnfermero);
 
 router.post("/agregar-paciente/:id", check, agregarPaciente);

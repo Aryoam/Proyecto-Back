@@ -31,6 +31,8 @@ app.use("/api/administrador", routesAdministrador);
 app.use("/api/enfermero", routesEnfermero);
 app.use("/api/paciente", routesPaciente);
 app.use("/api/pendiente", routesPendiente);
+app.use("/api/admin", routesPaciente);
+app.use("/api/aizon", routesEnfermero);
 
 app.listen(4000, () => {
   console.log("Servidor correcto");

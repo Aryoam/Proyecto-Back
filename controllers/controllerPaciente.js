@@ -3,6 +3,11 @@ import Administrador from "../models/Administrador.js";
 import Enfermero from "../models/Enfermero.js";
 import Historial from "../models/Historial.js";
 
+const aizon = async (req, res) => {
+  const pacientes = await Paciente.find();
+  res.json(pacientes);
+};
+
 const registrarPaciente = async (req, res) => {
   const pacienteDuplicado = await Paciente.findOne({
     telefono: req.body.telefono,
@@ -144,4 +149,5 @@ export {
   agregarHistorial,
   buscarHistorial,
   editarHistorial,
+  aizon,
 };

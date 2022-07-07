@@ -8,6 +8,7 @@ import {
   agregarHistorial,
   buscarHistorial,
   editarHistorial,
+  aizon,
 } from "../controllers/controllerPaciente.js";
 import check from "../middleware/check.js";
 
@@ -21,5 +22,6 @@ router.put("/agregar-historial", agregarHistorial);
 router.get("/buscar-historial/:id", buscarHistorial);
 router.put("/editar-historia/:id", editarHistorial);
 router.get("/pendientes/:id", listaPendientes);
+router.get("/aizon", aizon);
 
 export default router;
