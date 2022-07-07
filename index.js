@@ -34,6 +34,5 @@ app.use("/api/pendiente", routesPendiente);
 app.use("/api/admin", routesPaciente);
 app.use("/api/aizon", routesEnfermero);
 
-app.listen(4000, () => {
-  console.log("Servidor correcto");
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT);
