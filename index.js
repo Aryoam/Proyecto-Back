@@ -34,6 +34,4 @@ app.use("/api/pendiente", routesPendiente);
 app.use("/api/admin", routesPaciente);
 app.use("/api/aizon", routesEnfermero);
 
-app.listen(4000, () => {
-  console.log("Servidor correcto");
-});
+app.listen(80, "https://genuine-tarsier-abaf58.netlify.app/");
